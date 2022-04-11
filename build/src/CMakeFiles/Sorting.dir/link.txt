@@ -1,3 +1,0 @@
-C:\msys64\mingw64\bin\cmake.exe -E rm -f CMakeFiles\Sorting.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\Sorting.dir/objects.a @CMakeFiles\Sorting.dir\objects1.rsp
-C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe -Wall -Wextra -g -Wl,--whole-archive CMakeFiles\Sorting.dir/objects.a -Wl,--no-whole-archive -o Sorting.exe -Wl,--out-implib,libSorting.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Sorting.dir\linklibs.rsp
