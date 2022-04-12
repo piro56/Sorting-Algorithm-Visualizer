@@ -13,4 +13,5 @@ public:
     unsigned int getBuffer() {return BO; }
     BufferObject(GLenum target);
     ~BufferObject();
+
 };

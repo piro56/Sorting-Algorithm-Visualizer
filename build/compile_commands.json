@@ -21,6 +21,11 @@
 },
 {
   "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/SimpleGL.dir/includes_CXX.rsp -Wall -Wextra -g -std=gnu++17 -o CMakeFiles\\SimpleGL.dir\\src\\ShaderManager.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\SimpleGL\\src\\ShaderManager.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/ShaderManager.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL",
   "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/SimpleGL.dir/includes_CXX.rsp -Wall -Wextra -g -std=gnu++17 -o CMakeFiles\\SimpleGL.dir\\src\\ShaderProgram.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\SimpleGL\\src\\ShaderProgram.cpp\"",
   "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/ShaderProgram.cpp"
 },

@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <iostream>
 #include "ShaderProgram.h"
+#include "ShaderManager.h"
 #include "VertexArray.h"
 #include "BufferObject.h"
 class Triangle {

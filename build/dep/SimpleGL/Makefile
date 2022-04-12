@@ -201,6 +201,30 @@ src/SGLEngine.cpp.s:
 	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/SGLEngine.cpp.s
 .PHONY : src/SGLEngine.cpp.s
 
+src/ShaderManager.obj: src/ShaderManager.cpp.obj
+.PHONY : src/ShaderManager.obj
+
+# target to build an object file
+src/ShaderManager.cpp.obj:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/ShaderManager.cpp.obj
+.PHONY : src/ShaderManager.cpp.obj
+
+src/ShaderManager.i: src/ShaderManager.cpp.i
+.PHONY : src/ShaderManager.i
+
+# target to preprocess a source file
+src/ShaderManager.cpp.i:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/ShaderManager.cpp.i
+.PHONY : src/ShaderManager.cpp.i
+
+src/ShaderManager.s: src/ShaderManager.cpp.s
+.PHONY : src/ShaderManager.s
+
+# target to generate assembly for a file
+src/ShaderManager.cpp.s:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/ShaderManager.cpp.s
+.PHONY : src/ShaderManager.cpp.s
+
 src/ShaderProgram.obj: src/ShaderProgram.cpp.obj
 .PHONY : src/ShaderProgram.obj
 
@@ -291,6 +315,9 @@ help:
 	@echo ... src/SGLEngine.obj
 	@echo ... src/SGLEngine.i
 	@echo ... src/SGLEngine.s
+	@echo ... src/ShaderManager.obj
+	@echo ... src/ShaderManager.i
+	@echo ... src/ShaderManager.s
 	@echo ... src/ShaderProgram.obj
 	@echo ... src/ShaderProgram.i
 	@echo ... src/ShaderProgram.s

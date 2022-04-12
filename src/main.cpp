@@ -1,18 +1,18 @@
 #include <iostream>
 #include <random>
 #include <time.h>
+#include <windows.h>
 
 #include <glad/glad.h>  // Manages function pointers
 #include <glfw3.h>      // Manages window
 #include "SGLEngine.h"
 #include "Triangle.h"
+
 void process_input(GLFWwindow *window);
 void gl_check_error();
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
-
-
 int main() {
     srand(time(NULL));
 
@@ -23,7 +23,9 @@ int main() {
     if (engine.createWindow("Sorting") == -1) return -1;    // engine handles window creation
     GLFWwindow* window = engine.get_window();
 
-
+    char result[ MAX_PATH ];
+    std::string s = std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
+    std::cout << "Path" << s << std::endl;
 
     while(!glfwWindowShouldClose(window)) {
         process_input(window);

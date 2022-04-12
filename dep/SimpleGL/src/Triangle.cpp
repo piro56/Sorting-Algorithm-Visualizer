@@ -22,6 +22,12 @@ Triangle::Triangle(float width, float height) {
     vao = VertexArray();
     vao.bind();
     vbo = BufferObject(GL_ARRAY_BUFFER);
-    
-
+    vbo.bind();
+    vbo.setBufferData(sizeof(buffer), this->buffer, GL_DYNAMIC_DRAW);
+    // Position
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, 6 * sizeof(float), 0);
+    glEnableVertexAttribArray(0);
+    // Color
+    glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)(3*sizeof(float)));
+    glEnableVertexAttribArray(1);
 }
