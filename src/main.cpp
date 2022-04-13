@@ -5,8 +5,9 @@
 
 #include <glad/glad.h>  // Manages function pointers
 #include <glfw3.h>      // Manages window
-#include "SGLEngine.h"
-#include "Triangle.h"
+#include "SGLEngine.hpp"
+#include "ShaderManager.hpp"
+#include "Triangle.hpp"
 
 void process_input(GLFWwindow *window);
 void gl_check_error();
@@ -23,17 +24,21 @@ int main() {
     if (engine.createWindow("Sorting") == -1) return -1;    // engine handles window creation
     GLFWwindow* window = engine.get_window();
 
-    char result[ MAX_PATH ];
-    std::string s = std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
-    std::cout << "Path" << s << std::endl;
-
+    ShaderManager shaderManager;
+    shaderManager.load_shader("Triangle");
+    Triangle t = Triangle(0.5, 0.5);
+    ShaderProgram* sp = shaderManager.getShader("Triangle");
+    if (sp == NULL) {
+        return 1;
+    }
     while(!glfwWindowShouldClose(window)) {
         process_input(window);
         glClearColor(0.2f, cos(glfwGetTime()), 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        sp->use();
+        t.draw();
 
-
-
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

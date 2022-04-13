@@ -116,6 +116,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named copy_assets
+
+# Build rule for target.
+copy_assets: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 copy_assets
+.PHONY : copy_assets
+
+# fast build rule for target.
+copy_assets/fast:
+	$(MAKE) $(MAKESILENT) -f src\CMakeFiles\copy_assets.dir\build.make src/CMakeFiles/copy_assets.dir/build
+.PHONY : copy_assets/fast
+
+#=============================================================================
 # Target rules for targets named Sorting
 
 # Build rule for target.
@@ -162,6 +175,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... copy_assets
 	@echo ... SimpleGL
 	@echo ... Sorting
 	@echo ... glad

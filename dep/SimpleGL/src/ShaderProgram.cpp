@@ -1,4 +1,4 @@
-#include "ShaderProgram.h"
+#include "ShaderProgram.hpp"
 
 
 ShaderProgram::ShaderProgram(std::string vertex_path, std::string fragment_path) {
@@ -63,6 +63,11 @@ void ShaderProgram::setVec3Float(const std::string &name, float value_one, float
 void ShaderProgram::setMatrix4f(const std::string &name, GLboolean transpose, const GLfloat* value) const {
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgramID, name.c_str()), 1, transpose, value);
 }
+
+/*
+ * Loads ShaderProgram with given vertex and fragment path (needs full path)
+ */
+
 void ShaderProgram::load(const char* vertexPath, const char* fragPath) {
     unsigned int vertexShader;
     unsigned int fragmentShader;
@@ -71,6 +76,7 @@ void ShaderProgram::load(const char* vertexPath, const char* fragPath) {
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
     loaded = true;
+
     // Ensure ifstream can throw exceptions
     vShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
     fShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
@@ -121,13 +127,4 @@ void ShaderProgram::load(const char* vertexPath, const char* fragPath) {
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
-}
-
-
-std::string ShaderProgram::get_shader_file(std::string fileName) {
-    std::string s = ShaderProgram::getexepath();
-    s = s.substr(0, s.find("builds"));
-    s = s + "src\\shaders\\" + fileName;
-    //std::cout << "OUTPUT S:" << s << "\n\n";
-    return s;
 }

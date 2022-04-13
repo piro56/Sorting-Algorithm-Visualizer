@@ -1,4 +1,4 @@
-#include "BufferObject.h"
+#include "BufferObject.hpp"
 
 /* Generates Buffer Object with type target*/
 BufferObject::BufferObject(GLenum target) {

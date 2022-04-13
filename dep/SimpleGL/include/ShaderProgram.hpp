@@ -16,13 +16,7 @@ private:
     unsigned int shaderProgramID;
     bool loaded;
 public:
-    // Detach shader and recompile program?
-    //void loadVertexShader(std::string vertexShader);
-    //void loadFragmentShader(std::string fragShader);
-    
-    // Compile shaders and link
-    //void loadShaders(std::string vertexShaderPath, std::string fragShaderPath);
-    static std::string get_shader_file(std::string fileName);   
+
     void compileCheck(unsigned int vertexShader, bool vertex);
     void use();
     void load(const char* vertexPath, const char* fragPath);

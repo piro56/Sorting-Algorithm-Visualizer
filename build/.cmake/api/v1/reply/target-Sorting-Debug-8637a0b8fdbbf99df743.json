@@ -15,6 +15,7 @@
 		[
 			"add_executable",
 			"target_link_libraries",
+			"add_dependencies",
 			"include_directories"
 		],
 		"files" : 
@@ -35,13 +36,19 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 15,
+				"line" : 23,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 5,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 13,
 				"parent" : 0
 			}
 		]
@@ -61,11 +68,11 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 4,
 					"path" : "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/src/../dep/GLFW/include"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 4,
 					"path" : "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/src/../dep/glm"
 				},
 				{
@@ -98,6 +105,10 @@
 	],
 	"dependencies" : 
 	[
+		{
+			"backtrace" : 3,
+			"id" : "copy_assets::@145eef247bfb46b6828c"
+		},
 		{
 			"backtrace" : 2,
 			"id" : "SimpleGL::@6ac164da2413f62525d9"

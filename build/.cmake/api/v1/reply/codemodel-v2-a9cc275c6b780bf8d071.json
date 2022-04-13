@@ -32,7 +32,8 @@
 					"source" : "src",
 					"targetIndexes" : 
 					[
-						1
+						1,
+						2
 					]
 				},
 				{
@@ -62,7 +63,7 @@
 					"source" : "dep/GLAD",
 					"targetIndexes" : 
 					[
-						2
+						3
 					]
 				}
 			],
@@ -83,7 +84,8 @@
 					"name" : "Sorting",
 					"targetIndexes" : 
 					[
-						1
+						1,
+						2
 					]
 				},
 				{
@@ -107,7 +109,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						2
+						3
 					]
 				}
 			],
@@ -123,8 +125,15 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "Sorting::@145eef247bfb46b6828c",
-					"jsonFile" : "target-Sorting-Debug-8041169cf997b59f520d.json",
+					"jsonFile" : "target-Sorting-Debug-8637a0b8fdbbf99df743.json",
 					"name" : "Sorting",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "copy_assets::@145eef247bfb46b6828c",
+					"jsonFile" : "target-copy_assets-Debug-ef184b13f23d31edc2e3.json",
+					"name" : "copy_assets",
 					"projectIndex" : 0
 				},
 				{

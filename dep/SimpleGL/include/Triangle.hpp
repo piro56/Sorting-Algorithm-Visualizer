@@ -1,10 +1,15 @@
 #pragma once
 #include <glad/glad.h>
 #include <iostream>
-#include "ShaderProgram.h"
-#include "ShaderManager.h"
-#include "VertexArray.h"
-#include "BufferObject.h"
+
+#include "glm.hpp"
+#include "gtc/matrix_transform.hpp"
+#include "gtc/type_ptr.hpp"
+
+#include "ShaderProgram.hpp"
+#include "ShaderManager.hpp"
+#include "VertexArray.hpp"
+#include "BufferObject.hpp"
 class Triangle {
 private:
 
@@ -17,6 +22,8 @@ float scale = 1.0f;
 float width;
 float height;
 float rotation = 0.0f;
+glm::mat4 transform;
+
 
 public:
 Triangle(float width, float height);

@@ -1,4 +1,4 @@
-#include "SGLEngine.h"
+#include "SGLEngine.hpp"
 
 void DEFAULT_FRAMEBUFFER_SIZE_CALLBACK(GLFWwindow* window, int width, int height) {
     (void) window;

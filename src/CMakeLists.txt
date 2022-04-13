@@ -2,6 +2,14 @@ project(Sorting)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
+# Copies asset directory into build
+
+add_custom_target(copy_assets
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/shaders ${CMAKE_CURRENT_BINARY_DIR}/src/shaders
+)
+
+add_dependencies(${PROJECT_NAME} copy_assets)
+
 include_directories(../dep/GLFW/include ../dep/glm)
 
 

@@ -1,4 +1,4 @@
-#include "Triangle.h"
+#include "Triangle.hpp"
 
 /*
  * Generate a triangle with width and height
@@ -18,7 +18,6 @@ Triangle::Triangle(float width, float height) {
     buffer[9] = -halfY;
     buffer[13] = halfY;
 
-    
     vao = VertexArray();
     vao.bind();
     vbo = BufferObject(GL_ARRAY_BUFFER);
@@ -30,4 +29,13 @@ Triangle::Triangle(float width, float height) {
     // Color
     glVertexAttribPointer(1, 3, GL_FLOAT, false, 6 * sizeof(float), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
+    
+    this->transform = glm::mat4(1.0f);
+}
+
+
+
+void Triangle::draw() {
+    vao.bind();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }

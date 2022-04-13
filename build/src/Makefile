@@ -116,6 +116,20 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+src/CMakeFiles/copy_assets.dir/rule:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/CMakeFiles/copy_assets.dir/rule
+.PHONY : src/CMakeFiles/copy_assets.dir/rule
+
+# Convenience name for target.
+copy_assets: src/CMakeFiles/copy_assets.dir/rule
+.PHONY : copy_assets
+
+# fast build rule for target.
+copy_assets/fast:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\copy_assets.dir\build.make src/CMakeFiles/copy_assets.dir/build
+.PHONY : copy_assets/fast
+
+# Convenience name for target.
 src/CMakeFiles/Sorting.dir/rule:
 	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 src/CMakeFiles/Sorting.dir/rule
 .PHONY : src/CMakeFiles/Sorting.dir/rule
@@ -161,6 +175,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... copy_assets
 	@echo ... Sorting
 	@echo ... main.obj
 	@echo ... main.i
