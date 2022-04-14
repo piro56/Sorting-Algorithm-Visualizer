@@ -5,9 +5,11 @@
 #include <sstream>
 #include <fstream>
 #include <windows.h>
-// TODO: Derived classes!!
-// Combine Vertex and Fragment into one.
 
+/*
+ * Compiles and links vertex and fragment shader code together
+ * Acts as an abstracted shader program.
+ */
 
 class ShaderProgram {
 private:
@@ -38,5 +40,9 @@ public:
     ShaderProgram(const char* vertexPath, const char* fragPath);
     ShaderProgram(std::string sourcePath);
     ShaderProgram();
+
+    // unsure if we need this
+    //~ShaderProgram();
+
     bool isLoaded() { return loaded; }
 };

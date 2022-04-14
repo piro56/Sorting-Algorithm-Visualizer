@@ -24,7 +24,6 @@ void ShaderManager::load_shader(std::string shadername) {
     ShaderProgram sp;
 
     sp.load((DEFAULT_PATH + shadername + ".vs").c_str(), (DEFAULT_PATH + shadername + ".fs").c_str());
-
     if (sp.isLoaded()) {
         sp.setName(shadername);
         this->shaders.push_back(sp);
@@ -47,5 +46,5 @@ void ShaderManager::load_shader_from_path(const char* pathvs, const char* pathfs
 ShaderManager::ShaderManager() {
     char result[ MAX_PATH ];
     DEFAULT_PATH = std::string( result, GetModuleFileName( NULL, result, MAX_PATH ) );
-    DEFAULT_PATH = DEFAULT_PATH.substr(0, DEFAULT_PATH.find_last_of('\\')) + "\\shaders";
+    DEFAULT_PATH = DEFAULT_PATH.substr(0, DEFAULT_PATH.find_last_of('\\')) + "\\shaders\\";
 }

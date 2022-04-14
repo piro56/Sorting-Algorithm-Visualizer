@@ -1,7 +1,7 @@
 #include "VertexArray.hpp"
 
 VertexArray::VertexArray() {
-    glGenVertexArrays(1, &this->VAO);
+    glGenVertexArrays(1, &VAO);
 }
 
 void VertexArray::bind() {

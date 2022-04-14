@@ -3,6 +3,15 @@
 #include "ShaderProgram.hpp"
 #include <vector>
 #include <string>
+
+/* ShaderManager
+ * loads ShaderPrograms and stores them in a vector to be referenced by their names later
+ * load: (name).vs and (name).fs, from shaders directory in same dir as the .exe
+ * Can also load given a path directly to the source vertex and fragment shader.
+ * 
+ * TODO: Use hashmap to reference faster?
+ */
+
 class ShaderManager {
 private:
     std::vector<ShaderProgram> shaders;

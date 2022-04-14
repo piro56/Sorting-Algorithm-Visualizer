@@ -13,6 +13,9 @@ ShaderProgram::ShaderProgram() {
 
 }
 
+// ShaderProgram::~ShaderProgram() {
+//     glDeleteProgram(this->shaderProgramID);
+// }
 
 void ShaderProgram::use() {
     glUseProgram(this->shaderProgramID);
@@ -94,6 +97,7 @@ void ShaderProgram::load(const char* vertexPath, const char* fragPath) {
     } else {
         std::cout << "ERROR::SHADERPROGRAM::FILE_READ_ERROR......" << std::endl;
         loaded = false;
+        return;
     }
 
     const char* vShaderCode = vertexCode.c_str();

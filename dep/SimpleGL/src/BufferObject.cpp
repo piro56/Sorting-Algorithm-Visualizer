@@ -3,7 +3,7 @@
 /* Generates Buffer Object with type target*/
 BufferObject::BufferObject(GLenum target) {
     this->target = target;
-    glGenBuffers(1, &this->BO);
+    glGenBuffers(1, &BO);
 }
 
 /* Binds buffer to it's target */

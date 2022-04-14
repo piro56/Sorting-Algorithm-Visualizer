@@ -8,6 +8,7 @@
 #include "SGLEngine.hpp"
 #include "ShaderManager.hpp"
 #include "Triangle.hpp"
+#include "Rectangle.hpp"
 
 void process_input(GLFWwindow *window);
 void gl_check_error();
@@ -18,7 +19,7 @@ int main() {
     srand(time(NULL));
 
     std::ios_base::sync_with_stdio(0);
-    std::cout << "Compile Time: " << __TIME__ << "\n";
+    std::cout << "Compile Time: " << __TIME__ << std::endl;
     SGLEngine engine = SGLEngine(SCREEN_WIDTH, SCREEN_HEIGHT);
     
     if (engine.createWindow("Sorting") == -1) return -1;    // engine handles window creation
@@ -26,19 +27,27 @@ int main() {
 
     ShaderManager shaderManager;
     shaderManager.load_shader("Triangle");
-    Triangle t = Triangle(0.5, 0.5);
+
     ShaderProgram* sp = shaderManager.getShader("Triangle");
+    Triangle t = Triangle(0.5, 0.5, sp);
     if (sp == NULL) {
         return 1;
     }
+
     while(!glfwWindowShouldClose(window)) {
-        process_input(window);
-        glClearColor(0.2f, cos(glfwGetTime()), 0.9f, 1.0f);
+        process_input(window);    
+
+        glClearColor(0.2f, 0.2, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
         sp->use();
+        t.setRotation(3.14);
+        t.setPosition(0, 0);
         t.draw();
 
-        
+
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
