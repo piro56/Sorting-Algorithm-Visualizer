@@ -18,9 +18,7 @@ Triangle::Triangle(float width, float height) {
     buffer[7] = -halfY;
     buffer[13] = halfY;
 
-    vao = VertexArray();
     vao.bind();
-    vbo = BufferObject(GL_ARRAY_BUFFER);
     vbo.bind();
     vbo.setBufferData(sizeof(buffer), this->buffer, GL_DYNAMIC_DRAW);
     // Position
@@ -51,7 +49,6 @@ Triangle::Triangle(float width, float height, ShaderProgram* shader) {
     buffer[7] = -halfY;
     buffer[13] = halfY;
     vao.bind();
-    //vbo = BufferObject(GL_ARRAY_BUFFER);
     vbo.bind();
     vbo.setBufferData(sizeof(buffer), buffer, GL_STATIC_DRAW);
     // Position

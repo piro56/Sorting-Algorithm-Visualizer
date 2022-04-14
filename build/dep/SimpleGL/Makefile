@@ -153,30 +153,6 @@ src/BufferObject.cpp.s:
 	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/BufferObject.cpp.s
 .PHONY : src/BufferObject.cpp.s
 
-src/Rectangle.obj: src/Rectangle.cpp.obj
-.PHONY : src/Rectangle.obj
-
-# target to build an object file
-src/Rectangle.cpp.obj:
-	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/Rectangle.cpp.obj
-.PHONY : src/Rectangle.cpp.obj
-
-src/Rectangle.i: src/Rectangle.cpp.i
-.PHONY : src/Rectangle.i
-
-# target to preprocess a source file
-src/Rectangle.cpp.i:
-	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/Rectangle.cpp.i
-.PHONY : src/Rectangle.cpp.i
-
-src/Rectangle.s: src/Rectangle.cpp.s
-.PHONY : src/Rectangle.s
-
-# target to generate assembly for a file
-src/Rectangle.cpp.s:
-	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/Rectangle.cpp.s
-.PHONY : src/Rectangle.cpp.s
-
 src/SGLEngine.obj: src/SGLEngine.cpp.obj
 .PHONY : src/SGLEngine.obj
 
@@ -200,6 +176,30 @@ src/SGLEngine.s: src/SGLEngine.cpp.s
 src/SGLEngine.cpp.s:
 	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/SGLEngine.cpp.s
 .PHONY : src/SGLEngine.cpp.s
+
+src/SGLRect.obj: src/SGLRect.cpp.obj
+.PHONY : src/SGLRect.obj
+
+# target to build an object file
+src/SGLRect.cpp.obj:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/SGLRect.cpp.obj
+.PHONY : src/SGLRect.cpp.obj
+
+src/SGLRect.i: src/SGLRect.cpp.i
+.PHONY : src/SGLRect.i
+
+# target to preprocess a source file
+src/SGLRect.cpp.i:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/SGLRect.cpp.i
+.PHONY : src/SGLRect.cpp.i
+
+src/SGLRect.s: src/SGLRect.cpp.s
+.PHONY : src/SGLRect.s
+
+# target to generate assembly for a file
+src/SGLRect.cpp.s:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f dep\SimpleGL\CMakeFiles\SimpleGL.dir\build.make dep/SimpleGL/CMakeFiles/SimpleGL.dir/src/SGLRect.cpp.s
+.PHONY : src/SGLRect.cpp.s
 
 src/ShaderManager.obj: src/ShaderManager.cpp.obj
 .PHONY : src/ShaderManager.obj
@@ -309,12 +309,12 @@ help:
 	@echo ... src/BufferObject.obj
 	@echo ... src/BufferObject.i
 	@echo ... src/BufferObject.s
-	@echo ... src/Rectangle.obj
-	@echo ... src/Rectangle.i
-	@echo ... src/Rectangle.s
 	@echo ... src/SGLEngine.obj
 	@echo ... src/SGLEngine.i
 	@echo ... src/SGLEngine.s
+	@echo ... src/SGLRect.obj
+	@echo ... src/SGLRect.i
+	@echo ... src/SGLRect.s
 	@echo ... src/ShaderManager.obj
 	@echo ... src/ShaderManager.i
 	@echo ... src/ShaderManager.s

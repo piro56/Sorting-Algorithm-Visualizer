@@ -11,13 +11,13 @@
 },
 {
   "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL",
-  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/SimpleGL.dir/includes_CXX.rsp -Wall -Wextra -g -std=gnu++17 -o CMakeFiles\\SimpleGL.dir\\src\\Rectangle.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\SimpleGL\\src\\Rectangle.cpp\"",
-  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/Rectangle.cpp"
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/SimpleGL.dir/includes_CXX.rsp -Wall -Wextra -g -std=gnu++17 -o CMakeFiles\\SimpleGL.dir\\src\\SGLEngine.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\SimpleGL\\src\\SGLEngine.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/SGLEngine.cpp"
 },
 {
   "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL",
-  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/SimpleGL.dir/includes_CXX.rsp -Wall -Wextra -g -std=gnu++17 -o CMakeFiles\\SimpleGL.dir\\src\\SGLEngine.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\SimpleGL\\src\\SGLEngine.cpp\"",
-  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/SGLEngine.cpp"
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/SimpleGL.dir/includes_CXX.rsp -Wall -Wextra -g -std=gnu++17 -o CMakeFiles\\SimpleGL.dir\\src\\SGLRect.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\SimpleGL\\src\\SGLRect.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/SGLRect.cpp"
 },
 {
   "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL",

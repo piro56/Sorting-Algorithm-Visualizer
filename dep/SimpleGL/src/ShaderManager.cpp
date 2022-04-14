@@ -6,7 +6,7 @@ ShaderProgram* ShaderManager::getShader(std::string shadername) {
             return &sp;
         }
     }
-    std::cout << "[WARNING] Shader " << shadername << " was not found\n"; 
+    std::cout << "[WARNING] Shader " << shadername << " was not found" << std::endl; 
     return nullptr;
 }
 

@@ -8,7 +8,7 @@
 #include "SGLEngine.hpp"
 #include "ShaderManager.hpp"
 #include "Triangle.hpp"
-#include "Rectangle.hpp"
+#include "SGLRect.hpp"
 
 void process_input(GLFWwindow *window);
 void gl_check_error();
@@ -27,9 +27,12 @@ int main() {
 
     ShaderManager shaderManager;
     shaderManager.load_shader("Triangle");
-
+    shaderManager.load_shader("Rectangle");
     ShaderProgram* sp = shaderManager.getShader("Triangle");
+    ShaderProgram* rectShader = shaderManager.getShader("Rectangle");
     Triangle t = Triangle(0.5, 0.5, sp);
+    SGLRect r = SGLRect(0.2, 0.7, rectShader);
+    
     if (sp == NULL) {
         return 1;
     }
@@ -43,8 +46,11 @@ int main() {
         sp->use();
         t.setRotation(3.14);
         t.setPosition(0, 0);
-        t.draw();
-
+        //t.draw();
+        rectShader->use();
+        r.setColor(cos(glfwGetTime()), 0.2f, 0.3f);
+        r.setRotation(sin(glfwGetTime()));
+        r.draw();
 
 
 
