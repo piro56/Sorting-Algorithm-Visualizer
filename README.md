@@ -16,6 +16,8 @@ Visualize sorting algorithms in OpenGL
 - Add keybinds (i.e pause, escape, etc.)
 - Add speed option
 - Add many other algorithms.
+- Add border
+- Add sounds
 
 ## Learning Outcomes:
 - Gain some familiarity with CMake
