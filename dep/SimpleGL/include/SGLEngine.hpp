@@ -19,7 +19,7 @@ void (*framebuffer_size_callback)(GLFWwindow* window, int width, int height);
 SGLEngine(int width, int height);
 int createWindow(std::string windowName);
 GLFWwindow* get_window() { return window; }
-
+void clearWindow(float r, float g, float b);
 
 };
 #endif

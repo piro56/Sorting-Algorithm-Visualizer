@@ -4,8 +4,8 @@ SortingRects::SortingRects(int numRects, ShaderProgram* rShader) {
     this->rShader = rShader;
     this->rects.reserve(numRects);
 
-    float recWidths = 2.0f / numRects; 
-    float offset = -1.0f + recWidths * 0.5;
+    recWidths = 2.0f / numRects; 
+    wOffset = -1.0f + recWidths * 0.5;
     for (int i = 0; i < numRects; i++) {
         // generates height 0 to 1
         float rheight = (float) rand() / RAND_MAX;
@@ -15,7 +15,7 @@ SortingRects::SortingRects(int numRects, ShaderProgram* rShader) {
 
         // -1.0 + width*i <- aligns rects left to right
         // -1.0 + 0.5 * rheight <- aligns bottom of rectangles to bottom of screen
-        rects.back()->setPosition(offset + recWidths * i, -1.0 + 0.5 * rheight);
+        rects.back()->setPosition(wOffset + recWidths * i, -1.0 + 0.5 * rheight);
     }
 }
 SortingRects::~SortingRects() {
@@ -26,7 +26,21 @@ SortingRects::~SortingRects() {
 }
 
 void SortingRects::draw() {
-    for (SGLRect* sr : rects) {
-        sr->draw();
+    for (size_t i = 0; i < rects.size(); i++) {
+        rects[i]->setPosition(wOffset + recWidths * i, -1.0 + 0.5 * rects[i]->getHeight());
+        rects[i]->draw();
+    }
+}
+void SortingRects::resetColor(SGLRect* rect) {
+    float color = std::min(1.0f, rect->getHeight() + 0.1f);
+    rect->setColor(color, color, color);
+}
+
+void SortingRects::printHeights() {
+    for (size_t i = 1; i < rects.size() + 1; i++) {
+        std::cout << rects[i-1]->getHeight() << "  ";
+        if (i % 10 == 0) {
+            std::cout << std::endl;
+        }
     }
 }
