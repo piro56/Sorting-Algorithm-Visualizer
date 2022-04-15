@@ -59,7 +59,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-Wall -Wextra -g"
+					"fragment" : "-g -Wall -Wextra -g"
 				},
 				{
 					"fragment" : "-std=gnu++17"
@@ -74,6 +74,10 @@
 				{
 					"backtrace" : 4,
 					"path" : "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/src/../dep/glm"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/src/."
 				},
 				{
 					"backtrace" : 2,
@@ -99,7 +103,8 @@
 			},
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -124,7 +129,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-Wall -Wextra -g",
+				"fragment" : "-g -Wall -Wextra -g",
 				"role" : "flags"
 			},
 			{
@@ -176,7 +181,8 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -186,6 +192,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/SortingRects.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

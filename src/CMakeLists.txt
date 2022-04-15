@@ -1,6 +1,6 @@
 project(Sorting)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp SortingRects.cpp)
 
 # Copies asset directory into build
 
@@ -10,7 +10,7 @@ add_custom_target(copy_assets
 
 add_dependencies(${PROJECT_NAME} copy_assets)
 
-include_directories(../dep/GLFW/include ../dep/glm)
+include_directories(../dep/GLFW/include ../dep/glm .)
 
 
 target_include_directories(${PROJECT_NAME}

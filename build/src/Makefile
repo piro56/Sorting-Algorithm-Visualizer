@@ -143,6 +143,30 @@ Sorting/fast:
 	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\Sorting.dir\build.make src/CMakeFiles/Sorting.dir/build
 .PHONY : Sorting/fast
 
+SortingRects.obj: SortingRects.cpp.obj
+.PHONY : SortingRects.obj
+
+# target to build an object file
+SortingRects.cpp.obj:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\Sorting.dir\build.make src/CMakeFiles/Sorting.dir/SortingRects.cpp.obj
+.PHONY : SortingRects.cpp.obj
+
+SortingRects.i: SortingRects.cpp.i
+.PHONY : SortingRects.i
+
+# target to preprocess a source file
+SortingRects.cpp.i:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\Sorting.dir\build.make src/CMakeFiles/Sorting.dir/SortingRects.cpp.i
+.PHONY : SortingRects.cpp.i
+
+SortingRects.s: SortingRects.cpp.s
+.PHONY : SortingRects.s
+
+# target to generate assembly for a file
+SortingRects.cpp.s:
+	cd /d C:\Users\epicp\DOCUME~1\PROGRA~1\SORTIN~1\build && $(MAKE) $(MAKESILENT) -f src\CMakeFiles\Sorting.dir\build.make src/CMakeFiles/Sorting.dir/SortingRects.cpp.s
+.PHONY : SortingRects.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -177,6 +201,9 @@ help:
 	@echo ... rebuild_cache
 	@echo ... copy_assets
 	@echo ... Sorting
+	@echo ... SortingRects.obj
+	@echo ... SortingRects.i
+	@echo ... SortingRects.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

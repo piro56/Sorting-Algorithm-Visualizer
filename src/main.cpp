@@ -1,7 +1,6 @@
 #include <iostream>
 #include <random>
 #include <time.h>
-#include <windows.h>
 
 #include <glad/glad.h>  // Manages function pointers
 #include <glfw3.h>      // Manages window
@@ -9,6 +8,7 @@
 #include "ShaderManager.hpp"
 #include "Triangle.hpp"
 #include "SGLRect.hpp"
+#include "SortingRects.hpp"
 
 void process_input(GLFWwindow *window);
 void gl_check_error();
@@ -28,29 +28,21 @@ int main() {
     ShaderManager shaderManager;
     shaderManager.load_shader("Triangle");
     shaderManager.load_shader("Rectangle");
-    ShaderProgram* sp = shaderManager.getShader("Triangle");
     ShaderProgram* rectShader = shaderManager.getShader("Rectangle");
-    Triangle t = Triangle(0.5, 0.5, sp);
     SGLRect r = SGLRect(0.2, 0.7, rectShader);
-    
-    if (sp == NULL) {
+    if (rectShader == NULL) {
         return 1;
     }
-
+    SortingRects sr = SortingRects(100, rectShader);
+    
     while(!glfwWindowShouldClose(window)) {
         process_input(window);    
 
         glClearColor(0.2f, 0.2, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        sp->use();
-        t.setRotation(3.14);
-        t.setPosition(0, 0);
-        //t.draw();
         rectShader->use();
-        r.setColor(cos(glfwGetTime()), 0.2f, 0.3f);
-        r.setRotation(sin(glfwGetTime()));
-        r.draw();
+        //r.draw();
+        sr.draw();
 
 
 
