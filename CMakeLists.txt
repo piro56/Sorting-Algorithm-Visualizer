@@ -7,7 +7,7 @@ project(Sorting)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Wextra")
 find_package( OpenGL REQUIRED )
 # glm
 set(GLM_LIB_NAME "glm")

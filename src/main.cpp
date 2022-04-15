@@ -13,7 +13,7 @@
 #include "SGLRect.hpp"
 #include "SortingRects.hpp"
 
-#define SORTDELAY 0  // 0.01s (in ms)
+#define SORTDELAY 1  // 0.01s (in ms)
 void process_input(GLFWwindow *window);
 void gl_check_error();
 
@@ -34,13 +34,13 @@ int main() {
 
     ShaderManager shaderManager;
     shaderManager.load_shader("Triangle");
-    shaderManager.load_shader("Rectangle");
-    ShaderProgram* rectShader = shaderManager.getShader("Rectangle");
+    shaderManager.load_shader("SortingRect");
+    ShaderProgram* rectShader = shaderManager.getShader("SortingRect");
     SGLRect r = SGLRect(0.2, 0.7, rectShader);
     if (rectShader == NULL) {
         return 1;
     }
-    SortingRects sr = SortingRects(100, rectShader);
+    SortingRects sr = SortingRects(50, rectShader);
     
     /*
      * Eventually this while loop will be replaced with a loop within sorting rectangles
@@ -53,7 +53,7 @@ int main() {
             sr.rects[j] = sr.rects[j-1];
             sr.rects[j]->setColor(0.6, 0.2, 0.2);
             sr.rects[j-1]->setColor(0.2, 0.2, 0.6);
-            //process_input(window);    
+            process_input(window);    
             glClearColor(0.1f, 0.1, 0.2f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
             rectShader->use();
@@ -62,7 +62,7 @@ int main() {
             glfwPollEvents();
             sr.resetColor(sr.rects[j]);
             sr.resetColor(sr.rects[j-1]);
-            //std::this_thread::sleep_for(std::chrono::milliseconds(SORTDELAY));
+            std::this_thread::sleep_for(std::chrono::milliseconds(SORTDELAY));
             j--;
         }
         sr.rects[j] = key;

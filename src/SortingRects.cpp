@@ -10,8 +10,8 @@ SortingRects::SortingRects(int numRects, ShaderProgram* rShader) {
         // generates height 0 to 1
         float rheight = (float) rand() / RAND_MAX;
         rects.emplace_back(new SGLRect(recWidths, rheight, rShader));
-        float color = std::min(1.0f, rheight + 0.1f);
-        rects.back()->setColor(color, color, color);
+        //float color = std::min(1.0f, rheight + 0.1f);
+        rects.back()->setColor(rheight, rheight, rheight);
 
         // -1.0 + width*i <- aligns rects left to right
         // -1.0 + 0.5 * rheight <- aligns bottom of rectangles to bottom of screen
@@ -32,8 +32,8 @@ void SortingRects::draw() {
     }
 }
 void SortingRects::resetColor(SGLRect* rect) {
-    float color = std::min(1.0f, rect->getHeight() + 0.1f);
-    rect->setColor(color, color, color);
+    float col = rect->getHeight();
+    rect->setColor(col, col, col);
 }
 
 void SortingRects::printHeights() {
