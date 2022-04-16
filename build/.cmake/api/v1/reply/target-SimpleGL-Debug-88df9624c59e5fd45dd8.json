@@ -57,7 +57,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O3 -g -Wall -Wextra -g"
+					"fragment" : "  -g -g -DDEBUG -Wall -Wextra"
 				},
 				{
 					"fragment" : "-std=gnu++17"

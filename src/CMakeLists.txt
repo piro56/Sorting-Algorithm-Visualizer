@@ -1,6 +1,6 @@
 project(Sorting)
-
-add_executable(${PROJECT_NAME} main.cpp SortingRects.cpp)
+# set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ADDITIONAL_CFLAGS} -g")
+add_executable(${PROJECT_NAME} main.cpp SortingRects.cpp Sorting.cpp)
 
 # Copies asset directory into build
 

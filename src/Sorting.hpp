@@ -7,28 +7,32 @@
 #include <glfw3.h>      // Manages window
 #include "SGLRect.hpp"
 #include "ShaderProgram.hpp"
-
+#include "BufferObject.hpp"
+#include "VertexArray.hpp"
 
 /*
  * Creates an array of rectangles you can sort by height
  */
 
-class SortingRects {
+class Sorting {
 private:
+    VertexArray vao;
+    BufferObject vertBuffer = BufferObject(GL_ARRAY_BUFFER);
+    BufferObject colBuffer = BufferObject(GL_ARRAY_BUFFER);
+    BufferObject elemBuffer = BufferObject(GL_ELEMENT_ARRAY_BUFFER);
+
     ShaderProgram* rShader = NULL;
     float recWidths;
     float wOffset;
+    int numRects;
 public:
-    
-    /* Public for easier use to swap and display sorting */
-    std::vector<SGLRect*> rects;
 
     /* Creates numRects amount of rectangles and fills them in vector rects *
      * Sets fixed width and a random height to each rectangle               */
-    SortingRects(int numRects, ShaderProgram* rShader);
+    Sorting(int numRects, ShaderProgram* rShader);
     
     /* Deallocates rects */
-    ~SortingRects();
+    ~Sorting();
 
     /* Issues draw call on each SGLRect. Does not bind shader program.*/
     void draw();
@@ -37,8 +41,6 @@ public:
 
     /* Print for debug*/
     void printHeights();
-
-
 };
 
 

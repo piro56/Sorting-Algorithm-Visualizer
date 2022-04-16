@@ -1,5 +1,10 @@
 {
-    "tasks": [
+    "tasks": [ 
+        {
+            "label": "build", 
+            "type": "shell",
+            "command": "make"
+        },
         {
             "type": "cppbuild",
             "label": "C/C++: cl.exe build active file",

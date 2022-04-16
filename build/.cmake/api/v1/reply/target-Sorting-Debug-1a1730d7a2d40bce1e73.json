@@ -59,7 +59,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O3 -g -Wall -Wextra -g"
+					"fragment" : "  -g -g -DDEBUG -Wall -Wextra"
 				},
 				{
 					"fragment" : "-std=gnu++17"
@@ -104,7 +104,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -129,7 +130,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-O3 -g -Wall -Wextra -g",
+				"fragment" : "-g -g -DDEBUG -Wall -Wextra",
 				"role" : "flags"
 			},
 			{
@@ -182,7 +183,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -198,6 +200,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/SortingRects.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/Sorting.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
