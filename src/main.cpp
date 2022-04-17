@@ -15,7 +15,7 @@
 #include "Sorting.hpp"
 
 #define SORTDELAY 50  // in ms
-void process_input(GLFWwindow *window);
+int process_input(GLFWwindow *window);
 void gl_check_error();
 
 const int SCREEN_WIDTH = 800;
@@ -45,10 +45,10 @@ int main() {
     }
 
     SortingRects sr = SortingRects(50, rectShader);
-    Sorting s = Sorting(30, rectShader);
-
+    Sorting s = Sorting(10, rectShader);
+    s.printPoints();
     while(!glfwWindowShouldClose(window)) {
-        process_input(window);    
+        int input = process_input(window);
         glClearColor(0.1f, 0.1, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         sortShader->use();
@@ -60,12 +60,17 @@ int main() {
 }
 
 // Processes user input
-void process_input(GLFWwindow *window) {
+int process_input(GLFWwindow *window) {
     // ESC -> Close Window
 
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
+        return -1;
     }
+    else if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+        return 4;
+    }
+    return 0;
 }
 
 

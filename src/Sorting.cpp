@@ -10,7 +10,6 @@ Sorting::Sorting(int numRects, ShaderProgram* rShader) {
     std::fill(vertices, vertices + numRects * 4, 0.0f);
 
     float rectWidth = 2.0f / numRects;
-    float halfW = rectWidth/ 2.0f;
     float rectHeight = 0.0f;
 
     // Generate rectangles
@@ -33,12 +32,10 @@ Sorting::Sorting(int numRects, ShaderProgram* rShader) {
         vertices[i * 12 + 10] = rectHeight;             // TR Y
         // 11 is Z
     }
+    
+    this->rectangles = (Rect*) vertices;
 
     // Generate a EBO for every rect 
-    // 2 rects 24, 8 VERTICES
-    // 0, 1, 2, 3, 4, 5, 6, 7
-    // 0 1 2 2 3 0
-    // 4 5 6 6 8 4
     for (int i = 0; i < numRects; i++) {
         unsigned int idxOff = 4 * i;
         elements[i * 6] = idxOff;            // BL
@@ -50,20 +47,20 @@ Sorting::Sorting(int numRects, ShaderProgram* rShader) {
         elements[i * 6 + 5] = idxOff;        // BL
     }
 
-
     vao.bind();
     vertBuffer.bind();
-    vertBuffer.setBufferData(sizeof(float) * numRects * 12, vertices, GL_DYNAMIC_DRAW);
+    vertBuffer.setBufferData(sizeof(float) * numRects * 12, NULL, GL_STREAM_DRAW);
+    void* buffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+    memcpy(buffer, vertices, sizeof(float) * numRects * 12);
+    glUnmapBuffer(GL_ARRAY_BUFFER);
     elemBuffer.bind();
     elemBuffer.setBufferData(sizeof(unsigned int) * numRects * 6, elements, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
     glEnableVertexAttribArray(0);
-    delete[] vertices;
     delete[] elements;
     elements = NULL;
-    vertices = NULL;
-}
 
+}
 
 void Sorting::draw() {
     vao.bind();
@@ -71,6 +68,42 @@ void Sorting::draw() {
     glDrawElements(GL_TRIANGLES, 6 * numRects, GL_UNSIGNED_INT, 0);
 }
 
+void printPoint(Point& p) {
+    std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")";
+}
+
+void Sorting::printPoints() {
+    for (int i = 0; i < numRects; i++) {
+        printPoint(rectangles[i].BL);
+        std::cout << "  ";
+        printPoint(rectangles[i].BR);
+        std::cout << "  ";
+        printPoint(rectangles[i].TR);
+        std::cout << "  ";
+        printPoint(rectangles[i].TL);
+        std::cout << std::endl;
+    }
+}
+
+void Sorting::update_buffer() {
+    vertBuffer.setBufferData(sizeof(float) * numRects * 12, NULL, GL_STREAM_DRAW);
+    void* buffer = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+    memcpy((float*) rectangles, buffer, sizeof(float) * numRects * 12);
+    glUnmapBuffer(GL_ARRAY_BUFFER);
+}
+
+void Sorting::insertionSort() {
+    for (int i = 0; i < (int) numRects; i++) {
+    Rect key = rectangles[i];
+    int j = i;
+    while (j > 0 && rectangles[j-1].TR.y > key.TR.y) {
+        rectangles[j] = rectangles[j-1];
+        j--;
+    }
+    rectangles[j] = key;
+}
+}
 
 Sorting::~Sorting() {
+    delete[] rectangles;
 }

@@ -10,6 +10,20 @@
 #include "BufferObject.hpp"
 #include "VertexArray.hpp"
 
+struct Point {
+    float x;
+    float y;
+    float z;
+};
+
+struct Rect {
+    Point BL;
+    Point BR;
+    Point TR;
+    Point TL;
+};
+
+
 /*
  * Creates an array of rectangles you can sort by height
  */
@@ -25,7 +39,12 @@ private:
     float recWidths;
     float wOffset;
     int numRects;
+
+    /* updates vertBuffer to match data in vertices*/
+    void update_buffer();
+
 public:
+    Rect* rectangles;
 
     /* Creates numRects amount of rectangles and fills them in vector rects *
      * Sets fixed width and a random height to each rectangle               */
@@ -39,8 +58,12 @@ public:
     /* Sets rectangle back to its original shade */
     void resetColor(SGLRect* rect);
 
+    void insertionSort();
+
     /* Print for debug*/
-    void printHeights();
+    void printPoints();
+
+
 };
 
 
