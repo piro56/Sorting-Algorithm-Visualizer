@@ -5,7 +5,7 @@ Visualize sorting algorithms in OpenGL
 ![sort2](https://user-images.githubusercontent.com/69094266/163530054-aaa53f0d-06a4-4528-a26b-8edf7c094732.gif)
 
 
-## TODO:
+## Areas of Improvement:
 - Optimize drawing and updating rectangles
 - Opt: Instead of using uniform for color, use a buffer
 - Opt: Stop using transformation uniform
