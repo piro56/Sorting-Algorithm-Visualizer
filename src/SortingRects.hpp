@@ -38,7 +38,6 @@ public:
     /* Print for debug*/
     void printHeights();
 
-
 };
 
 

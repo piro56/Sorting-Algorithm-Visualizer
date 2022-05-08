@@ -69,7 +69,7 @@ void Sorting::draw() {
 }
 
 void printPoint(Point& p) {
-    std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")";
+    std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ") ";
 }
 
 void Sorting::printPoints() {
@@ -101,7 +101,7 @@ void Sorting::insertionSort() {
         j--;
     }
     rectangles[j] = key;
-}
+    }
 }
 
 Sorting::~Sorting() {

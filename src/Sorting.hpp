@@ -32,7 +32,7 @@ class Sorting {
 private:
     VertexArray vao;
     BufferObject vertBuffer = BufferObject(GL_ARRAY_BUFFER);
-    BufferObject colBuffer = BufferObject(GL_ARRAY_BUFFER);
+    //BufferObject colBuffer = BufferObject(GL_ARRAY_BUFFER);
     BufferObject elemBuffer = BufferObject(GL_ELEMENT_ARRAY_BUFFER);
 
     ShaderProgram* rShader = NULL;
@@ -40,11 +40,14 @@ private:
     float wOffset;
     int numRects;
 
-    /* updates vertBuffer to match data in vertices*/
-    void update_buffer();
+
 
 public:
+    // holds all of the vertices for the rectangles
     Rect* rectangles;
+
+    /* updates vertBuffer to match data in vertices */
+    void update_buffer();
 
     /* Creates numRects amount of rectangles and fills them in vector rects *
      * Sets fixed width and a random height to each rectangle               */
@@ -62,6 +65,8 @@ public:
 
     /* Print for debug*/
     void printPoints();
+
+    void swapRand();
 
 
 };

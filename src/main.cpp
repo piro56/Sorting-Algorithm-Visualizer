@@ -23,6 +23,8 @@ const int SCREEN_HEIGHT = 600;
 bool compareRect(SGLRect* r1, SGLRect* r2) {
     return (r1->getHeight() < r2->getHeight());
 }
+ void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader);
+
 int main() {
     srand(time(NULL));
     std::ios_base::sync_with_stdio(0);
@@ -46,13 +48,14 @@ int main() {
 
     SortingRects sr = SortingRects(50, rectShader);
     Sorting s = Sorting(10, rectShader);
-    s.printPoints();
+    insertion_sort(&sr, window, rectShader);
     while(!glfwWindowShouldClose(window)) {
         int input = process_input(window);
+        (void) input;
         glClearColor(0.1f, 0.1, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        sortShader->use();
-        s.draw();
+        rectShader->use();
+        sr.draw();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -81,28 +84,35 @@ void gl_check_error() {
         std::cout << "Error: " << err << "\n";
     }
 }
-
-/*  INSERTION SORT
-    for (int i = 0; i < (int) sr.rects.size(); i++) {
-        SGLRect* key = sr.rects[i];
+ 
+ void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader) {
+         for (int i = 0; i < (int) sr->rects.size(); i++) {
+        SGLRect* key = sr->rects[i];
         int j = i;
-        while (j > 0 && sr.rects[j-1]->getHeight() > key->getHeight()) {
-            sr.rects[j] = sr.rects[j-1];
-            sr.rects[j]->setColor(0.6, 0.2, 0.2);
-            sr.rects[j-1]->setColor(0.2, 0.2, 0.6); 
+        while (j > 0 && sr->rects[j-1]->getHeight() > key->getHeight()) {
+            sr->rects[j] = sr->rects[j-1];
+            sr->rects[j]->setColor(0.6, 0.2, 0.2);
+            sr->rects[j-1]->setColor(0.2, 0.2, 0.6); 
             process_input(window);
             if (glfwWindowShouldClose(window)) break;
             glClearColor(0.1f, 0.1, 0.2f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
             rectShader->use();
-            sr.draw();
+            sr->draw();
             glfwSwapBuffers(window);
             glfwPollEvents();
-            sr.resetColor(sr.rects[j]);
-            sr.resetColor(sr.rects[j-1]);
+            sr->resetColor(sr->rects[j]);
+            sr->resetColor(sr->rects[j-1]);
             std::this_thread::sleep_for(std::chrono::milliseconds(SORTDELAY));
             j--;
         }
-        sr.rects[j] = key;
+        sr->rects[j] = key;
     }
- */
+ }
+
+// Handle threaded changing of values here...
+// Draw separately.
+// Perhaps sync?
+void threaded_insertion_sort() {
+
+}
