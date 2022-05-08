@@ -23,7 +23,7 @@ public:
     /* Public for easier use to swap and display sorting */
     std::vector<SGLRect*> rects;
 
-    /* Creates numRects amount of rectangles and fills them in vector rects *
+    /* Creates numRects amount of SGLRects and fills them in vector rects *
      * Sets fixed width and a random height to each rectangle               */
     SortingRects(int numRects, ShaderProgram* rShader);
     
@@ -32,6 +32,7 @@ public:
 
     /* Issues draw call on each SGLRect. Does not bind shader program.*/
     void draw();
+    
     /* Sets rectangle back to its original shade */
     void resetColor(SGLRect* rect);
 

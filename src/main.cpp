@@ -23,7 +23,8 @@ const int SCREEN_HEIGHT = 600;
 bool compareRect(SGLRect* r1, SGLRect* r2) {
     return (r1->getHeight() < r2->getHeight());
 }
- void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader);
+void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader);
+void threaded_insertion_sort(SortingRects*);
 
 int main() {
     srand(time(NULL));
@@ -48,7 +49,7 @@ int main() {
 
     SortingRects sr = SortingRects(50, rectShader);
     Sorting s = Sorting(10, rectShader);
-    insertion_sort(&sr, window, rectShader);
+    std::thread sort_task(threaded_insertion_sort, &sr);
     while(!glfwWindowShouldClose(window)) {
         int input = process_input(window);
         (void) input;
@@ -59,6 +60,8 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    sort_task.join();
+
 
 }
 
@@ -113,6 +116,15 @@ void gl_check_error() {
 // Handle threaded changing of values here...
 // Draw separately.
 // Perhaps sync?
-void threaded_insertion_sort() {
-
+void threaded_insertion_sort(SortingRects* sr) {
+    for (int i = 0; i < (int) sr->rects.size(); i++) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(SORTDELAY));
+        SGLRect* key = sr->rects[i];
+        int j = i;
+        while (j > 0 && sr->rects[j-1]->getHeight() > key->getHeight()) {
+            sr->rects[j] = sr->rects[j-1];  // SYNC?
+            j--;
+        }
+        sr->rects[j] = key; // SYNC?
+    }
 }
