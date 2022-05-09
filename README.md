@@ -17,6 +17,6 @@ Visualize sorting algorithms in OpenGL
 ### Features
 - Menu
 - Keybinds (i.e pause, escape, etc.)
-- Speed option
+- ~~Speed option~~
 - Border around rectangles
 - Sounds
