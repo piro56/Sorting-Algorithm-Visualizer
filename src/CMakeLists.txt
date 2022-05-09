@@ -10,7 +10,7 @@ add_custom_target(copy_assets
 
 add_dependencies(${PROJECT_NAME} copy_assets)
 
-include_directories(../dep/GLFW/include ../dep/glm .)
+include_directories(../dep/GLFW/include ../dep/glm ../dep/IMGUI .)
 
 
 target_include_directories(${PROJECT_NAME}
@@ -23,6 +23,7 @@ target_include_directories(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC OpenGL::GL
     PUBLIC sub::simplegl
+    PUBLIC imgui
     PRIVATE glad
     PUBLIC glfw3 ${GLFW_LIBRARIES}
     )

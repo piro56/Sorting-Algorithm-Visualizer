@@ -18,5 +18,6 @@ set(GLM_INC_PATH dep/glm)
 # Add subdirectories
 add_subdirectory(src)
 add_subdirectory(dep/SimpleGL)
+add_subdirectory(dep/IMGUI)
 add_subdirectory(dep/GLAD)
 # add_subdirectory(dep/glm)

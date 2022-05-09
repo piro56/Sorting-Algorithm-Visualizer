@@ -271,6 +271,18 @@ Sorting_IS_TOP_LEVEL:STATIC=OFF
 //Value Computed by CMake
 Sorting_SOURCE_DIR:STATIC=C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/src
 
+//Value Computed by CMake
+imgui_BINARY_DIR:STATIC=C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI
+
+//Value Computed by CMake
+imgui_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+imgui_LIB_DEPENDS:STATIC=general;glad;general;glfw3;
+
+//Value Computed by CMake
+imgui_SOURCE_DIR:STATIC=C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI
+
 
 ########################
 # INTERNAL cache entries
@@ -378,7 +390,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

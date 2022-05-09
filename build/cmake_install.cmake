@@ -41,6 +41,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/src/cmake_install.cmake")
   include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL/cmake_install.cmake")
+  include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI/cmake_install.cmake")
   include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/GLAD/cmake_install.cmake")
 
 endif()

@@ -50,6 +50,41 @@
   "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/SimpleGL/src/VertexArray.cpp"
 },
 {
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_demo.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui_demo.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui_demo.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_draw.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui_draw.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui_draw.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_impl_glfw.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui_impl_glfw.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui_impl_glfw.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_impl_opengl3.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui_impl_opengl3.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui_impl_opengl3.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_tables.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui_tables.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui_tables.cpp"
+},
+{
+  "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI",
+  "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-g++.exe  @CMakeFiles/imgui.dir/includes_CXX.rsp   -g -g -DDEBUG -Wall -Wextra -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_widgets.cpp.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\IMGUI\\imgui_widgets.cpp\"",
+  "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI/imgui_widgets.cpp"
+},
+{
   "directory": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/GLAD",
   "command": "C:\\msys64\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe  @CMakeFiles/glad.dir/includes_C.rsp -g -DDEBUG -o CMakeFiles\\glad.dir\\include\\glad.c.obj -c \"C:\\Users\\epicp\\Documents\\Programming\\Sorting Algorithm Visualizer\\dep\\GLAD\\include\\glad.c\"",
   "file": "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/GLAD/include/glad.c"

@@ -155,6 +155,19 @@ SimpleGL/fast:
 .PHONY : SimpleGL/fast
 
 #=============================================================================
+# Target rules for targets named imgui
+
+# Build rule for target.
+imgui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 imgui
+.PHONY : imgui
+
+# fast build rule for target.
+imgui/fast:
+	$(MAKE) $(MAKESILENT) -f dep\IMGUI\CMakeFiles\imgui.dir\build.make dep/IMGUI/CMakeFiles/imgui.dir/build
+.PHONY : imgui/fast
+
+#=============================================================================
 # Target rules for targets named glad
 
 # Build rule for target.
@@ -179,6 +192,7 @@ help:
 	@echo ... SimpleGL
 	@echo ... Sorting
 	@echo ... glad
+	@echo ... imgui
 .PHONY : help
 
 
