@@ -34,7 +34,8 @@ bool compareRect(SGLRect* r1, SGLRect* r2) {
 }
 void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader);
 void threaded_insertion_sort(SortingRects*, std::atomic<bool>*);
-
+void threaded_merge_sort(SortingRects* const sr, std::atomic<bool>* const, int l, int r);
+void merge(SortingRects* const sr, std::atomic<bool>* const, int l, int m, int r);
 std::atomic<int> SORTING_DELAY(SORT_DELAY_DEFAULT);
 std::mutex rectLock;
 
@@ -55,12 +56,12 @@ int main() {
     if (rectShader == NULL || sortShader == NULL) {
         return 1;
     }
-    SortingRects sr = SortingRects(50, rectShader);
+    SortingRects sr = SortingRects(100, rectShader);
     Sorting s = Sorting(10, rectShader);
 
     std::atomic<bool> programRunning(true);
-    std::thread sort_task(threaded_insertion_sort, &sr, &programRunning);
-
+    //std::thread sort_task(threaded_insertion_sort, &sr, &programRunning);
+    std::thread sort_task(threaded_merge_sort, &sr, &programRunning, 0, sr.rects.size() - 1);
 
     // GUI
     IMGUI_CHECKVERSION();
@@ -71,6 +72,7 @@ int main() {
     ImGui_ImplOpenGL3_Init(glsl_version);
     ImGui::SetNextWindowSize(ImVec2(SCREEN_HEIGHT/4, SCREEN_WIDTH/4));
     float SORT_MULTIPLIER = 1.0f;
+    bool FINISH = false;
     while(!glfwWindowShouldClose(window)) {
         int input = process_input(window);
         (void) input;
@@ -86,10 +88,12 @@ int main() {
         ImGui::NewFrame();
         {
             ImGui::Begin("Sort Settings");
-            //ImGui::SliderFloat("Delay", &SORT_MULTIPLIER, 0.001, 10);
-            ImGui::SliderFloat("Speed", &SORT_MULTIPLIER, 0.1, 12, "%.3f", ImGuiSliderFlags_Logarithmic);
-
-            SORTING_DELAY.store(SORT_DELAY_DEFAULT * (1.0f/SORT_MULTIPLIER), std::memory_order_relaxed);
+            ImGui::Checkbox("Speedup", &FINISH);            
+            ImGui::SliderFloat("Speed", &SORT_MULTIPLIER, 0.1, 10.0, "%.3f", ImGuiSliderFlags_Logarithmic);
+            SORTING_DELAY.store((SORT_DELAY_DEFAULT/ SORT_MULTIPLIER), std::memory_order_relaxed);
+            if (FINISH) {
+                SORTING_DELAY.store(0, std::memory_order_relaxed);
+            }
             ImGui::End();
         }
         ImGui::Render();
@@ -100,10 +104,10 @@ int main() {
     }
     programRunning.store(false, std::memory_order_relaxed);
     sort_task.join();
-
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+
 }
 
 // Processes user input
@@ -182,7 +186,81 @@ void threaded_insertion_sort(SortingRects* sr, std::atomic<bool>* run) {
     }
 }
 
-void threaded_merge_sort(SortingRects* sr) {
-    // Merge sort .... sus
+void threaded_merge_sort(SortingRects* const sr, std::atomic<bool>* const run, int l, int r) {
+    if (!run->load(std::memory_order_relaxed)) return;
+    if (l >= r) return;
 
+    // find middle
+    int middle = l + (r - l) / 2; // floor(l+r/2)
+
+    threaded_merge_sort(sr, run, l, middle);
+    if (!run->load(std::memory_order_relaxed)) return;
+    threaded_merge_sort(sr, run, middle+1, r);
+    
+    // merge two halves;
+    merge(sr, run, l, middle, r);
+    if (!run->load(std::memory_order_relaxed)) return;\
+}
+
+void merge(SortingRects* const sr, std::atomic<bool>* const run, int l, int m, int r) {
+    if (!run->load(std::memory_order_relaxed)) return;
+    // sizes for new arrays
+    int arrOne = m - l + 1;
+    int arrTwo = r - m; 
+
+    // copy in sections of sr->rects into temp vectors
+    
+    rectLock.lock();
+    std::vector<SGLRect*> leftArr(sr->rects.begin() + l, sr->rects.begin() + l + arrOne);
+    std::vector<SGLRect*> rightArr(sr->rects.begin() + m + 1, sr->rects.begin() + m + 1 + arrTwo);
+
+    // set their colors
+    for (auto i = sr->rects.begin() + l; i != sr->rects.begin() + m + 1 + arrTwo; i++) {
+        (*i)->setColor(0.3, 0.3, 1.0);
+    }
+    rectLock.unlock();
+    
+    int leftIndex = 0, rightIndex = 0;
+    int mergedIndex = 0;
+
+    // merge arrays
+    
+    while(leftIndex < arrOne && rightIndex < arrTwo) {
+        // bad if we exit program here since we need to cleanup array, so we can skip delay if we do need to close
+        if (run->load(std::memory_order_relaxed)) {
+        std::this_thread::sleep_for(std::chrono::microseconds(
+                    SORTING_DELAY.load(std::memory_order_relaxed)));
+        }
+        if (leftArr[leftIndex]->getHeight() <= rightArr[rightIndex]->getHeight()) {
+            rectLock.lock();
+            sr->rects[l + mergedIndex] = leftArr[leftIndex];
+            rectLock.unlock();
+            leftIndex++;
+            mergedIndex++;
+        } else {
+            rectLock.lock();
+            sr->rects[l + mergedIndex] = rightArr[rightIndex];
+            rectLock.unlock();
+            rightIndex++;
+            mergedIndex++;
+        }
+    }
+    // copy in remaining
+
+    while (rightIndex < arrTwo) {
+        sr->rects[l+mergedIndex] = rightArr[rightIndex];
+        rightIndex++;
+        mergedIndex++;
+    }
+    while (leftIndex < arrOne) {
+        sr->rects[l+mergedIndex] = leftArr[leftIndex];
+        leftIndex++;
+        mergedIndex++;
+    }
+    if (!run->load(std::memory_order_relaxed)) return;
+    rectLock.lock();
+    for (auto i = sr->rects.begin() + l; i != sr->rects.begin() + m + 1 + arrTwo; i++) {
+        sr->resetColor(*i);
+    }
+    rectLock.unlock();
 }
