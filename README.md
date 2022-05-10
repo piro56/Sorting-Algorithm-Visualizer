@@ -9,14 +9,12 @@ Visualize sorting algorithms in OpenGL
 - Gain some familiarity with CMake
 - Implement and learn sorting algorithms
 
-## Possible Improvements:
-### Optimizations
-- Utilize array buffer instead of uniform
-- Combine rectangles to be within a singular buffer with a map
-- Sort on a different thread
-### Features
+## Current Features:
+- Insertion Sort (Threaded and unthreaded)
+- Speed Slider
+
+### TODO Features: 
 - Menu
 - Keybinds (i.e pause, escape, etc.)
-- Speed option
 - Border around rectangles
 - Sounds
