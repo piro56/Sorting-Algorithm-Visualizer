@@ -13,6 +13,7 @@
 #include "SGLRect.hpp"
 #include "SortingRects.hpp"
 
+#define DEBUG_SALG
 
 enum SORT_ALG {
     INSERTION, MERGESORT
@@ -33,10 +34,9 @@ void merge(SortingRects* const sr, std::atomic<int>* delay, std::atomic<bool>* s
 class SortingAlgs {
 private:
 static const int SORT_DELAY_DEFAULT = 10000;
-std::thread sort_task;
+std::thread* sort_task;
 std::mutex* vectorAccessLock;
 std::atomic<int>* SORTING_DELAY;
-SORT_ALG currentAlg = INSERTION;
 std::atomic<bool>* paused;     // if currently sorting (unpaused)
 std::atomic<bool>* stop_flag;
 bool thread_running = false;
@@ -45,10 +45,13 @@ SortingRects* sr;
 
 
 public:
+SORT_ALG currentAlg = INSERTION;
+
 SortingAlgs(SortingRects* sr, std::atomic<int>* SORTING_DELAY, std::mutex* access_lock);
 ~SortingAlgs();
 
 void pause();
+void unpause();
 void start();
 void stop();
 void start(SORT_ALG ALG);

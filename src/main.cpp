@@ -71,6 +71,7 @@ int main() {
     ImGui::SetNextWindowSize(ImVec2(SCREEN_HEIGHT/4, SCREEN_WIDTH/4));
     float SORT_MULTIPLIER = 1.0f;
     bool FINISH = false;
+    bool PAUSED = false;
 
 
     SortingAlgs sorter = SortingAlgs(&sr, &SORTING_DELAY, &rectLock);
@@ -80,6 +81,10 @@ int main() {
     sorter.start(SORT_ALG::INSERTION);
     while(!glfwWindowShouldClose(window)) {
         int input = process_input(window);
+        if (input == 4) {
+            sorter.reset();
+            sorter.start(sorter.currentAlg);
+        }
         (void) input;
         glClearColor(0.1f, 0.1, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -93,11 +98,17 @@ int main() {
         ImGui::NewFrame();
         {
             ImGui::Begin("Sort Settings");
-            ImGui::Checkbox("Speedup", &FINISH);            
+            ImGui::Checkbox("Speedup", &FINISH);
+            ImGui::Checkbox("Pause", &PAUSED);                        
             ImGui::SliderFloat("Speed", &SORT_MULTIPLIER, 0.1, 10.0, "%.3f", ImGuiSliderFlags_Logarithmic);
             SORTING_DELAY.store((SORT_DELAY_DEFAULT/ SORT_MULTIPLIER), std::memory_order_relaxed);
             if (FINISH) {
                 SORTING_DELAY.store(0, std::memory_order_relaxed);
+            }
+            if (PAUSED) {
+                sorter.pause();
+            } else {
+                sorter.unpause();
             }
             ImGui::End();
         }
@@ -107,7 +118,6 @@ int main() {
         glfwPollEvents();
     }
     sorter.stop();
-    programRunning.store(false, std::memory_order_relaxed);
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

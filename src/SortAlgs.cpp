@@ -7,8 +7,9 @@ void threaded_insertion_sort(SortingRects* sr, std::atomic<int>* delay, std::ato
         SGLRect* key = sr->rects[i];
         int j = i;
         
-        if (stop_flag->load(std::memory_order_relaxed)) return;
-        
+        if (stop_flag->load(std::memory_order_relaxed)) { 
+            return;
+        }        
         // PAUSE LOOP
         while (pause->load(std::memory_order_relaxed)) {
             if (stop_flag->load(std::memory_order_relaxed)) return;
@@ -23,7 +24,7 @@ void threaded_insertion_sort(SortingRects* sr, std::atomic<int>* delay, std::ato
             sr->rects[j-1]->setColor(0.2, 0.2, 0.6);
             rectLock->unlock();
             std::this_thread::sleep_for(std::chrono::microseconds(
-                    delay->load(std::memory_order_relaxed) / 10));
+                    delay->load(std::memory_order_relaxed)));
 
             rectLock->lock();
             sr->resetColor(sr->rects[j-1]);
@@ -34,9 +35,12 @@ void threaded_insertion_sort(SortingRects* sr, std::atomic<int>* delay, std::ato
         rectLock->lock();
         sr->rects[j] = key;
         rectLock->unlock();
-        if (stop_flag->load(std::memory_order_relaxed)) return;
-        // PAUSE LOOP
+        if (stop_flag->load(std::memory_order_relaxed)) { 
+            return;
+        }
+        //PAUSE LOOP
         while (pause->load(std::memory_order_relaxed)) {
+            if (stop_flag->load(std::memory_order_relaxed)) return;
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
     }
@@ -51,12 +55,12 @@ this->vectorAccessLock = access_lock;
 this->SORTING_DELAY = delay;
 this->paused = new std::atomic<bool>(false);
 this->stop_flag = new std::atomic<bool>(false);
+this->sort_task = NULL;
 }
 
 SortingAlgs::~SortingAlgs() {
-    if (thread_running) {
+    if (sort_task != NULL) {
         stop();
-        sort_task.join();
     }
     delete(paused);
     delete(stop_flag);
@@ -65,33 +69,45 @@ SortingAlgs::~SortingAlgs() {
 void SortingAlgs::pause() {
     paused->store(true, std::memory_order_relaxed);
 }
+void SortingAlgs::unpause() {
+    paused->store(false, std::memory_order_relaxed);
+}
 
 void SortingAlgs::reset() {
-    pause();
-    sort_task.join();
+    stop();
     sr->randomize();
 }
 
-void SortingAlgs::selectAlgorithm() {
-    if (thread_running) {
-        stop();
-    }
-
-}
-
 void SortingAlgs::stop() {
-    this->stop_flag->store(true, std::memory_order_relaxed);
+    if (sort_task != NULL) {
     this->paused->store(false, std::memory_order_relaxed);
-    sort_task.join();
+    this->stop_flag->store(true, std::memory_order_relaxed);
+    
+    // sleep for thread to join
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    if (sort_task->joinable()) {
+        sort_task->join();
+    }
     thread_running = false;
+    delete(sort_task);
+    sort_task = NULL;
+    }
 }
 void SortingAlgs::start(SORT_ALG alg) {
-    if (thread_running) {
+    if (thread_running || sort_task != NULL) {
+        #ifdef DEBUG_SALG
+        std::cout << "Stopping current thread in start" << std::endl;
+        #endif
         stop();
     }
     switch(alg) {
         case SORT_ALG::INSERTION: 
-            sort_task = std::thread(threaded_insertion_sort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock);
+            #ifdef DEBUG_SALG
+            std::cout << "Starting Insertion Sort" << std::endl;
+            #endif
+            stop_flag->store(false, std::memory_order_relaxed);
+            sort_task = new std::thread(threaded_insertion_sort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock);
             thread_running = true;
             break;
         default:
