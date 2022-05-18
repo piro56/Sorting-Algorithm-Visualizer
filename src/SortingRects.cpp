@@ -44,3 +44,8 @@ void SortingRects::printHeights() {
         }
     }
 }
+
+void SortingRects::randomize() {
+    auto rng = std::default_random_engine {};
+    std::shuffle(std::begin(rects), std::end(rects), rng);
+}

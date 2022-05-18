@@ -60,5 +60,5 @@
         "mutex": "cpp"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "cmake.configureOnOpen": true
+    "cmak`e.configureOnOpen": true
 }

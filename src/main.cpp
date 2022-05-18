@@ -18,8 +18,7 @@
 #include "Triangle.hpp"
 #include "SGLRect.hpp"
 #include "SortingRects.hpp"
-#include "Sorting.hpp"
-
+#include "SortAlgs.hpp"
 #define SORT_DELAY_DEFAULT 10000  // in microseconds
 
 
@@ -57,11 +56,10 @@ int main() {
         return 1;
     }
     SortingRects sr = SortingRects(100, rectShader);
-    Sorting s = Sorting(10, rectShader);
 
     std::atomic<bool> programRunning(true);
     //std::thread sort_task(threaded_insertion_sort, &sr, &programRunning);
-    std::thread sort_task(threaded_merge_sort, &sr, &programRunning, 0, sr.rects.size() - 1);
+    //std::thread sort_task(threaded_merge_sort, &sr, &programRunning, 0, sr.rects.size() - 1);
 
     // GUI
     IMGUI_CHECKVERSION();
@@ -73,6 +71,13 @@ int main() {
     ImGui::SetNextWindowSize(ImVec2(SCREEN_HEIGHT/4, SCREEN_WIDTH/4));
     float SORT_MULTIPLIER = 1.0f;
     bool FINISH = false;
+
+
+    SortingAlgs sorter = SortingAlgs(&sr, &SORTING_DELAY, &rectLock);
+
+
+    // DRAW
+    sorter.start(SORT_ALG::INSERTION);
     while(!glfwWindowShouldClose(window)) {
         int input = process_input(window);
         (void) input;
@@ -98,12 +103,11 @@ int main() {
         }
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    sorter.stop();
     programRunning.store(false, std::memory_order_relaxed);
-    sort_task.join();
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -132,9 +136,9 @@ void gl_check_error() {
         std::cout << "Error: " << err << "\n";
     }
 }
- 
- void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader) {
-         for (int i = 0; i < (int) sr->rects.size(); i++) {
+
+void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader) {
+        for (int i = 0; i < (int) sr->rects.size(); i++) {
         SGLRect* key = sr->rects[i];
         int j = i;
         while (j > 0 && sr->rects[j-1]->getHeight() > key->getHeight()) {
@@ -157,7 +161,7 @@ void gl_check_error() {
         }
         sr->rects[j] = key;
     }
- }
+}
 
 void threaded_insertion_sort(SortingRects* sr, std::atomic<bool>* run) {
     for (int i = 0; i < (int) sr->rects.size(); i++) {

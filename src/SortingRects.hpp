@@ -1,7 +1,9 @@
+#pragma once
 #include <iostream>
 #include <random>
 #include <time.h>
 #include <vector>
+#include <algorithm>
 
 #include <glad/glad.h>  // Manages function pointers
 #include <glfw3.h>      // Manages window
@@ -38,6 +40,9 @@ public:
 
     /* Print for debug*/
     void printHeights();
+
+    /* Shuffles around rectangles */
+    void randomize();
 
 };
 

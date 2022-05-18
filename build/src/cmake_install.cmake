@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/src
+# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

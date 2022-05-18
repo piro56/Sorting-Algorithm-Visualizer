@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/GLAD
+# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/dep/GLAD
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
