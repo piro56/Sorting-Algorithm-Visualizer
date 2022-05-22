@@ -73,17 +73,26 @@ int main() {
     bool FINISH = false;
     bool PAUSED = false;
 
-
+    const char* items[] = { 
+        "Insertion Sort",
+        "Merge Sort"
+    };
+    int currentAlg = 0;
+    bool reset = false;
+    bool start_new = false;
     SortingAlgs sorter = SortingAlgs(&sr, &SORTING_DELAY, &rectLock);
-
+    
 
     // DRAW
-    sorter.start(SORT_ALG::INSERTION);
     while(!glfwWindowShouldClose(window)) {
         int input = process_input(window);
-        if (input == 4) {
+        if (start_new) {
+            sorter.stop();
+            sorter.start((SORT_ALG) currentAlg);
+        }
+        if (input == 4 || reset) {
             sorter.reset();
-            sorter.start(sorter.currentAlg);
+            sorter.start((SORT_ALG) currentAlg);
         }
         (void) input;
         glClearColor(0.1f, 0.1, 0.2f, 1.0f);
@@ -98,9 +107,14 @@ int main() {
         ImGui::NewFrame();
         {
             ImGui::Begin("Sort Settings");
+            start_new = ImGui::Button("Start");                        
+            reset = ImGui::Button("Reset");
+            ImGui::SameLine();
             ImGui::Checkbox("Speedup", &FINISH);
+            ImGui::SameLine();
             ImGui::Checkbox("Pause", &PAUSED);                        
             ImGui::SliderFloat("Speed", &SORT_MULTIPLIER, 0.1, 10.0, "%.3f", ImGuiSliderFlags_Logarithmic);
+            ImGui::ListBox("listbox", &currentAlg, items, IM_ARRAYSIZE(items), 3);
             SORTING_DELAY.store((SORT_DELAY_DEFAULT/ SORT_MULTIPLIER), std::memory_order_relaxed);
             if (FINISH) {
                 SORTING_DELAY.store(0, std::memory_order_relaxed);

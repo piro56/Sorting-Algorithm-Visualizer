@@ -16,7 +16,7 @@
 #define DEBUG_SALG
 
 enum SORT_ALG {
-    INSERTION, MERGESORT
+    INSERTION = 0, MERGESORT = 1
 };
 void insertion_sort(SortingRects* sr, GLFWwindow* window, ShaderProgram* rectShader);
 void threaded_insertion_sort(SortingRects* sr, std::atomic<int>* delay, 

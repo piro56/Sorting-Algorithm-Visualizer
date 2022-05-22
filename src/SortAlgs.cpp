@@ -47,7 +47,111 @@ void threaded_insertion_sort(SortingRects* sr, std::atomic<int>* delay, std::ato
 }
 
 
+void threaded_merge_sort(SortingRects* const sr, std::atomic<int>* delay, std::atomic<bool>* stop_flag, 
+                            std::atomic<bool>* pause, std::mutex* rectLock, int l, int r) {
 
+    if (stop_flag->load(std::memory_order_relaxed)) return;
+    while (pause->load(std::memory_order_relaxed)) {
+            if (stop_flag->load(std::memory_order_relaxed)) return;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    if (l >= r) return;
+
+    // find middle
+    int middle = l + (r - l) / 2; // floor(l+r/2)
+
+    threaded_merge_sort(sr, delay, stop_flag, pause, rectLock, l, middle);
+    if (stop_flag->load(std::memory_order_relaxed)) return;
+    while (pause->load(std::memory_order_relaxed)) {
+            if (stop_flag->load(std::memory_order_relaxed)) return;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    threaded_merge_sort(sr, delay, stop_flag, pause, rectLock, middle+1, r);
+    
+    // merge two halves;
+    merge(sr, delay, stop_flag, pause, rectLock, l, middle, r);
+    if (stop_flag->load(std::memory_order_relaxed)) return;
+    while (pause->load(std::memory_order_relaxed)) {
+            if (stop_flag->load(std::memory_order_relaxed)) return;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+void merge(SortingRects* const sr, std::atomic<int>* delay, std::atomic<bool>* stop_flag, 
+                            std::atomic<bool>* pause, std::mutex* rectLock, int l, int m, int r) {
+    if (stop_flag->load(std::memory_order_relaxed)) return;
+    while (pause->load(std::memory_order_relaxed)) {
+            if (stop_flag->load(std::memory_order_relaxed)) return;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    // sizes for new arrays
+    int arrOne = m - l + 1;
+    int arrTwo = r - m; 
+
+    // copy in sections of sr->rects into temp vectors
+    
+    rectLock->lock();
+    std::vector<SGLRect*> leftArr(sr->rects.begin() + l, sr->rects.begin() + l + arrOne);
+    std::vector<SGLRect*> rightArr(sr->rects.begin() + m + 1, sr->rects.begin() + m + 1 + arrTwo);
+
+    // set their colors
+    for (auto i = sr->rects.begin() + l; i != sr->rects.begin() + m + 1 + arrTwo; i++) {
+        (*i)->setColor(0.3, 0.3, 1.0);
+    }
+    rectLock->unlock();
+    
+    int leftIndex = 0, rightIndex = 0;
+    int mergedIndex = 0;
+
+    // merge arrays
+    
+    while(leftIndex < arrOne && rightIndex < arrTwo) {
+        // bad if we exit program here since we need to cleanup array, so we can skip delay if we do need to close
+        if (!stop_flag->load(std::memory_order_relaxed)) {
+            std::this_thread::sleep_for(std::chrono::microseconds(
+                    delay->load(std::memory_order_relaxed)));
+        }
+        while (pause->load(std::memory_order_relaxed)) {
+                if (stop_flag->load(std::memory_order_relaxed)) return;
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        if (leftArr[leftIndex]->getHeight() <= rightArr[rightIndex]->getHeight()) {
+            rectLock->lock();
+            sr->rects[l + mergedIndex] = leftArr[leftIndex];
+            rectLock->unlock();
+            leftIndex++;
+            mergedIndex++;
+        } else {
+            rectLock->lock();
+            sr->rects[l + mergedIndex] = rightArr[rightIndex];
+            rectLock->unlock();
+            rightIndex++;
+            mergedIndex++;
+        }
+    }
+    // copy in remaining
+
+    while (rightIndex < arrTwo) {
+        sr->rects[l+mergedIndex] = rightArr[rightIndex];
+        rightIndex++;
+        mergedIndex++;
+    }
+    while (leftIndex < arrOne) {
+        sr->rects[l+mergedIndex] = leftArr[leftIndex];
+        leftIndex++;
+        mergedIndex++;
+    }
+    rectLock->lock();
+    for (auto i = sr->rects.begin() + l; i != sr->rects.begin() + m + 1 + arrTwo; i++) {
+        sr->resetColor(*i);
+    }
+    rectLock->unlock();
+    if (stop_flag->load(std::memory_order_relaxed)) return;
+    while (pause->load(std::memory_order_relaxed)) {
+            if (stop_flag->load(std::memory_order_relaxed)) return;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
 
 SortingAlgs::SortingAlgs(SortingRects* sr, std::atomic<int>* delay, std::mutex* access_lock) {
 this->sr = sr;
@@ -109,6 +213,16 @@ void SortingAlgs::start(SORT_ALG alg) {
             stop_flag->store(false, std::memory_order_relaxed);
             sort_task = new std::thread(threaded_insertion_sort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock);
             thread_running = true;
+            currentAlg = SORT_ALG::INSERTION;
+            break;
+        case SORT_ALG::MERGESORT:
+            #ifdef DEBUG_SALG
+            std::cout << "Starting Merge Sort" << std::endl;
+            #endif
+            stop_flag->store(false, std::memory_order_relaxed);
+            sort_task = new std::thread(threaded_merge_sort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock, 0, sr->rects.size() - 1);
+            thread_running = true;
+            currentAlg = SORT_ALG::MERGESORT;
             break;
         default:
             break;
