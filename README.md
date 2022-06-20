@@ -8,13 +8,3 @@ Visualize sorting algorithms in OpenGL
 ## Learning Outcomes:
 - Gain some familiarity with CMake
 - Implement and learn sorting algorithms
-
-## Current Features:
-- Insertion Sort (Threaded and unthreaded)
-- Speed Slider
-
-### TODO Features: 
-- Menu
-- Keybinds (i.e pause, escape, etc.)
-- Border around rectangles
-- Sounds
