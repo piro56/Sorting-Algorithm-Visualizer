@@ -196,6 +196,7 @@ void heap_sort(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool
     buildMaxHeap(sr, delay, stop_flag, pause, rectLock);
     for (int i = heapSize - 1; i >= 0; i--)
     {
+        PAUSESTOP()
         rectLock->lock();
         sr->rects[0]->setColor(0.1, 0.8, 0.2);
         sr->rects[i]->setColor(0.1, 0.8, 0.2);
@@ -217,14 +218,14 @@ void heap_sort(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool
 void maxHeapify(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool> *stop_flag,
                 std::atomic<bool> *pause, std::mutex *rectLock, const size_t root, const size_t heap_size)
 {
-    PAUSESTOP();
+    PAUSESTOP()
     size_t left = HEAP_LEFT(root);
     size_t right = HEAP_RIGHT(root);
     size_t largest = root;
 
-    if (left < heap_size && (*sr)[left] > (*sr)[largest])
+    if (left < heap_size && sr->rects[left]->getHeight() > sr->rects[largest]->getHeight())
         largest = left;
-    if (right < heap_size && (*sr)[right] > (*sr)[largest])
+    if (right < heap_size && sr->rects[right]->getHeight() > sr->rects[largest]->getHeight())
         largest = right;
 
     if (largest != root)
@@ -242,7 +243,7 @@ void maxHeapify(SortingRects *const sr, std::atomic<int> *delay, std::atomic<boo
         std::this_thread::sleep_for(std::chrono::microseconds(
             delay->load(std::memory_order_relaxed)));
 
-        maxHeapify(sr, delay, stop_flag, pause, rectLock, root, heap_size);
+        maxHeapify(sr, delay, stop_flag, pause, rectLock, largest, heap_size);
 
         rectLock->lock();
         sr->resetColor(tmp);

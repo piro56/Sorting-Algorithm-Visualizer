@@ -61,12 +61,14 @@ void SortingRects::randomize()
     std::shuffle(std::begin(rects), std::end(rects), rng);
 }
 
-const float &SortingRects::operator[](const size_t i) const
+float SortingRects::operator[](const size_t i) const
 {
     return rects[i]->getHeight();
 }
 
 void SortingRects::swap(const size_t a, const size_t b)
 {
-    std::swap(rects[a], rects[b]);
+    SGLRect *ra = rects[a];
+    rects[a] = rects[b];
+    rects[b] = ra;
 }

@@ -45,7 +45,7 @@ public:
     void randomize();
 
     /* Retuns height of rectangle at index i */
-    const float &operator[](const size_t i) const;
+    float operator[](const size_t i) const;
 
     /* Swaps rectangles at index a and b */
     void swap(const size_t a, const size_t b);
