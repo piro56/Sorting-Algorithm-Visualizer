@@ -20,13 +20,13 @@
 
 /* Requires: std::atomic<bool> stop_flag, pause ----------------------------*/
 /* If stop, return out. If pause, sleep.                                    */
-#define PAUSESTOP()                                                          \
+#define PAUSESTOP(RETURN_VAL)                                                \
     if (stop_flag->load(std::memory_order_relaxed))                          \
-        return;                                                              \
+        return RETURN_VAL;                                                   \
     while (pause->load(std::memory_order_relaxed))                           \
     {                                                                        \
         if (stop_flag->load(std::memory_order_relaxed))                      \
-            return;                                                          \
+            return RETURN_VAL;                                               \
         std::this_thread::sleep_for(std::chrono::milliseconds(PAUSE_DELAY)); \
     }                                                                        \
     /*--------------------------------------------------------------------------*/
@@ -35,7 +35,8 @@ enum SORT_ALG
 {
     INSERTION = 0,
     MERGESORT = 1,
-    HEAPSORT  = 2
+    HEAPSORT = 2,
+    QUICKSORT = 3
 };
 void insertion_sort(SortingRects *sr, GLFWwindow *window, ShaderProgram *rectShader);
 void threaded_insertion_sort(SortingRects *sr, std::atomic<int> *delay,
@@ -51,6 +52,11 @@ void maxHeapify(SortingRects *const sr, std::atomic<int> *delay, std::atomic<boo
                 std::atomic<bool> *pause, std::mutex *rectLock, const size_t rootIndex, const size_t heapSize);
 void buildMaxHeap(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool> *stop_flag,
                   std::atomic<bool> *pause, std::mutex *rectLock);
+
+void quickSort(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool> *stop_flag,
+               std::atomic<bool> *pause, std::mutex *rectLock, int p, int r);
+int partition(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool> *stop_flag,
+              std::atomic<bool> *pause, std::mutex *rectLock, int p, int r);
 
 /* Runs SortingAlgorithm on SortingRects and manages threads.
  * Can pause or unpause threads

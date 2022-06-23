@@ -260,7 +260,43 @@ void buildMaxHeap(SortingRects *const sr, std::atomic<int> *delay, std::atomic<b
         maxHeapify(sr, delay, stop_flag, pause, rectLock, i, heapSize);
     }
 }
+void quickSort(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool> *stop_flag,
+               std::atomic<bool> *pause, std::mutex *rectLock, int p, int r)
+{
+    PAUSESTOP();
 
+    if (p < r)
+    {
+        std::this_thread::sleep_for(std::chrono::microseconds(
+            delay->load(std::memory_order_relaxed)));
+        int q = partition(sr, delay, stop_flag, pause, rectLock, p, r);
+        quickSort(sr, delay, stop_flag, pause, rectLock, p, q - 1);
+        quickSort(sr, delay, stop_flag, pause, rectLock, q + 1, r);
+    }
+}
+int partition(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool> *stop_flag,
+              std::atomic<bool> *pause, std::mutex *rectLock, int p, int r)
+{
+    SGLRect *x = sr->rects[r]; // pivot (we make it always the last element)
+    int i = p - 1;
+    for (int j = p; j != r - 1; j++)
+    {
+        PAUSESTOP(0);
+        std::this_thread::sleep_for(std::chrono::microseconds(
+            delay->load(std::memory_order_relaxed)));
+        rectLock->lock();
+        if ((*sr)[j] <= x->getHeight())
+        {
+            i++;
+            sr->swap(i, j);
+        }
+        rectLock->unlock();
+    }
+    rectLock->lock();
+    sr->swap(i + 1, r);
+    rectLock->unlock();
+    return i + 1;
+}
 SortingAlgs::SortingAlgs(SortingRects *sr, std::atomic<int> *delay, std::mutex *access_lock)
 {
     this->sr = sr;
@@ -353,7 +389,16 @@ void SortingAlgs::start(SORT_ALG alg)
         stop_flag->store(false, std::memory_order_relaxed);
         sort_task = new std::thread(heap_sort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock);
         thread_running = true;
-        currentAlg = SORT_ALG::MERGESORT;
+        currentAlg = SORT_ALG::HEAPSORT;
+        break;
+    case SORT_ALG::QUICKSORT:
+#ifdef DEBUG_SALG
+        std::cout << "Starting Quick Sort" << std::endl;
+#endif
+        stop_flag->store(false, std::memory_order_relaxed);
+        sort_task = new std::thread(quickSort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock, 0, sr->rects.size());
+        thread_running = true;
+        currentAlg = SORT_ALG::QUICKSORT;
         break;
     default:
         break;

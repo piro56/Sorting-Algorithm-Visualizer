@@ -80,7 +80,8 @@ int main()
     const char *items[] = {
         "Insertion Sort",
         "Merge Sort",
-        "Heap Sort"};
+        "Heap Sort",
+        "Quick Sort"};
     int currentAlg = 0;
     bool reset = false;
     bool start_new = false;
@@ -119,7 +120,7 @@ int main()
             ImGui::SameLine();
             ImGui::Checkbox("Pause", &PAUSED);
             ImGui::SliderFloat("Speed", &SORT_MULTIPLIER, 0.1, 10.0, "%.3f", ImGuiSliderFlags_Logarithmic);
-            ImGui::ListBox("listbox", &currentAlg, items, IM_ARRAYSIZE(items), 3);
+            ImGui::ListBox("listbox", &currentAlg, items, IM_ARRAYSIZE(items), 5);
             SORTING_DELAY.store((SORT_DELAY_DEFAULT / SORT_MULTIPLIER), std::memory_order_relaxed);
             if (FINISH)
             {
