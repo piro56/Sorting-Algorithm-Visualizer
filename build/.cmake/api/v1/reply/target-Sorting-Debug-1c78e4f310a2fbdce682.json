@@ -124,16 +124,16 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 2,
-			"id" : "imgui::@66f572c1f4e5a574bd16"
-		},
-		{
 			"backtrace" : 3,
 			"id" : "copy_assets::@145eef247bfb46b6828c"
 		},
 		{
 			"backtrace" : 2,
 			"id" : "SimpleGL::@6ac164da2413f62525d9"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "imgui::@66f572c1f4e5a574bd16"
 		},
 		{
 			"backtrace" : 2,

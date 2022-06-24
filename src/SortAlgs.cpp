@@ -278,20 +278,33 @@ int partition(SortingRects *const sr, std::atomic<int> *delay, std::atomic<bool>
               std::atomic<bool> *pause, std::mutex *rectLock, int p, int r)
 {
     SGLRect *x = sr->rects[r]; // pivot (we make it always the last element)
+    rectLock->lock();
+    sr->rects[r]->setColor(0.9, 0.4, 0.3);
+    rectLock->unlock();
     int i = p - 1;
-    for (int j = p; j != r - 1; j++)
+    for (int j = p; j < r; j++)
     {
         PAUSESTOP(0);
         std::this_thread::sleep_for(std::chrono::microseconds(
             delay->load(std::memory_order_relaxed)));
         rectLock->lock();
+        sr->rects[j]->setColor(0.3, 0.4, 0.9);
+
         if ((*sr)[j] <= x->getHeight())
         {
             i++;
+            sr->rects[i]->setColor(0.3, 0.9, 0.4);
             sr->swap(i, j);
         }
         rectLock->unlock();
     }
+    rectLock->lock();
+    for (int j = p; j < r; j++)
+    {
+        sr->resetColor(sr->rects[j]);
+    }
+    sr->resetColor(sr->rects[r]);
+    rectLock->unlock();
     rectLock->lock();
     sr->swap(i + 1, r);
     rectLock->unlock();
@@ -396,7 +409,7 @@ void SortingAlgs::start(SORT_ALG alg)
         std::cout << "Starting Quick Sort" << std::endl;
 #endif
         stop_flag->store(false, std::memory_order_relaxed);
-        sort_task = new std::thread(quickSort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock, 0, sr->rects.size());
+        sort_task = new std::thread(quickSort, sr, SORTING_DELAY, stop_flag, paused, vectorAccessLock, 0, sr->rects.size() - 1);
         thread_running = true;
         currentAlg = SORT_ALG::QUICKSORT;
         break;
