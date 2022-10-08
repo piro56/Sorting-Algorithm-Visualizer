@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer
+# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,10 +39,10 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/src/cmake_install.cmake")
-  include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/SimpleGL/cmake_install.cmake")
-  include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/IMGUI/cmake_install.cmake")
-  include("C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/dep/GLAD/cmake_install.cmake")
+  include("C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/build/src/cmake_install.cmake")
+  include("C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/build/dep/SimpleGL/cmake_install.cmake")
+  include("C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/build/dep/IMGUI/cmake_install.cmake")
+  include("C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/build/dep/GLAD/cmake_install.cmake")
 
 endif()
 
@@ -54,5 +54,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

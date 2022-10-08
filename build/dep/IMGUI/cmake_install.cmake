@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting Algorithm Visualizer/dep/IMGUI
+# Install script for directory: C:/Users/epicp/Documents/Programming/Sorting-Algorithm-Visualizer/dep/IMGUI
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
