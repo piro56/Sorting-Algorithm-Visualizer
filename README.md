@@ -24,6 +24,6 @@ Then finally, add your sorting function to "start" in SortingAlgs class.
 
 
 ## Learning Outcomes:
-- Gain some familiarity with CMake
+- Gain familiarity with CMake
 - Implement and learn sorting algorithms
 - Multithreading
