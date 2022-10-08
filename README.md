@@ -2,7 +2,8 @@
 Visualize sorting algorithms in OpenGL
 
 # Insertion Sort
-![sort2](https://user-images.githubusercontent.com/69094266/163530054-aaa53f0d-06a4-4528-a26b-8edf7c094732.gif)
+![sort2](https://user-images.githubusercontent.com/69094266/194721122-fc3f53b8-faf0-479e-9e8a-f518e16c802f.gif)
+
 
 
 ## Learning Outcomes:
