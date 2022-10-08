@@ -56,7 +56,7 @@ int main() {
     if (rectShader == NULL || sortShader == NULL) {
         return 1;
     }
-    SortingRects sr = SortingRects(100, rectShader);
+    SortingRects sr = SortingRects(50000, rectShader);
     Sorting s = Sorting(10, rectShader);
 
     std::atomic<bool> programRunning(true);
