@@ -8,9 +8,7 @@ Currently have implemented:
 - Merge Sort
 - Heap Sort
 - Quick Sort
-Counting Sorts are possible as well!
-
-
+<br/>
 
 ![sort2](https://user-images.githubusercontent.com/69094266/194721122-fc3f53b8-faf0-479e-9e8a-f518e16c802f.gif)
 
