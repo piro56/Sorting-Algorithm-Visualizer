@@ -1,9 +1,14 @@
 # Sorting-Algorithm-Visualizer
-Visualize sorting algorithms in OpenGL
+**Visualize sorting algorithms in OpenGL**
+Run sorting functions on separate thread and perform alterations based off rectangle height. <br/>
+Very easy to add more sorting algorithms to this project! <br/>
 
-### Visualizing Algorithms
-It is relatively easy to add more sorting algorithms to this project. Every algorithm runs on it's own separate thread and performs alterations on the rectangles we draw.
-The only overhead we need to account for is delaying the algorithm so we can visualize it, other than that, all we need to do is sort the rectangles!
+Currently have implemented:
+- Insertion Sort
+- Merge Sort
+- Heap Sort
+- Quick Sort
+Counting Sorts are possible as well!
 
 
 
