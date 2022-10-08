@@ -1,5 +1,5 @@
 # Sorting-Algorithm-Visualizer
-**Visualize sorting algorithms in OpenGL**
+**Easily visualize sorting algorithms in OpenGL** <br/>
 Run sorting functions on separate thread and perform alterations based off rectangle height. <br/>
 Very easy to add more sorting algorithms to this project! <br/>
 
